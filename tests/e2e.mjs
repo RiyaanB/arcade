@@ -21,9 +21,9 @@ for (const [tag, opts, minVisible] of [
   ['desk', { viewport: { width: 1280, height: 800 } }, 3],
   ['phone', { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true }, 4],
 ]) {
-  const ctx = await browser.newContext(opts); const page = await ctx.newPage(); const errs = [], ext = [];
+  const ctx = await browser.newContext(opts); await ctx.route(/gc\.zgo\.at|goatcounter\.com/, (r) => r.fulfill({ status: 200, contentType: 'text/javascript', body: '' })); const page = await ctx.newPage(); const errs = [], ext = [];
   page.on('pageerror', e => errs.push(String(e))); page.on('console', m => m.type() === 'error' && errs.push(m.text()));
-  page.on('request', r => { if (!r.url().startsWith(base)) ext.push(r.url()); });
+  page.on('request', r => { if (!r.url().startsWith(base) && !/gc\.zgo\.at|goatcounter\.com/.test(r.url())) ext.push(r.url()); });
   await page.goto(base + '/arcade/', { waitUntil: 'networkidle' });
   const s = await page.evaluate(() => ({
     cards: document.querySelectorAll('.card').length,
@@ -67,7 +67,8 @@ for (const [name, init, ctxOpts] of [
   ['throwing-storage', () => Object.defineProperty(window, 'localStorage', { get() { throw new DOMException('denied', 'SecurityError'); } }), {}],
   ['nojs', null, { javaScriptEnabled: false }],
 ]) {
-  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, ...ctxOpts }); const page = await ctx.newPage();
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, ...ctxOpts }); await ctx.route(/gc\.zgo\.at|goatcounter\.com/, (r) => r.fulfill({ status: 200, contentType: 'text/javascript', body: '' })); const page = await ctx.newPage();
+  await ctx.route(/gc\.zgo\.at|goatcounter\.com/, (r) => r.fulfill({ status: 200, contentType: 'text/javascript', body: '' })); // analytics stubbed in tests
   const errs = []; page.on('pageerror', e => errs.push(String(e)));
   if (init) await page.addInitScript(init);
   await page.goto(base + '/arcade/', { waitUntil: 'networkidle' });
@@ -79,7 +80,7 @@ for (const [name, init, ctxOpts] of [
   await ctx.close();
 }
 
-{ const ctx = await browser.newContext(); const p = await ctx.newPage();
+{ const ctx = await browser.newContext(); await ctx.route(/gc\.zgo\.at|goatcounter\.com/, (r) => r.fulfill({ status: 200, contentType: 'text/javascript', body: '' })); const p = await ctx.newPage();
   const r = await p.goto(base + '/arcade/og.png'); check(r.status() === 200, 'og.png ' + r.status()); await ctx.close(); }
 
 await browser.close(); srv.kill();

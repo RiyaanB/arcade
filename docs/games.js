@@ -24,4 +24,7 @@ export const GAMES = [
   { slug: 'hexclaim', name: 'Hexclaim', genre: 'Strategy duel', color: '#14b8a6', status: 'live', focus: '50% 50%',
     hook: 'Clone, jump, flip. A 3-minute hex strategy duel vs bots.',
     tags: ['Daily', '🤖 vs bot, 4 levels', 'Pass & play'] },
+  { slug: 'kablock', name: 'KABLOCK!', genre: 'Voxel arena shooter', color: '#ff5a36', status: 'new', focus: '50% 50%',
+    hook: 'Every wall breaks. Slide, grapple and blast through arenas vs bots.',
+    tags: ['3D', '🤖 vs 7 bots', 'Desktop & phone'] },
 ];

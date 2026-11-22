@@ -2,7 +2,7 @@
 // Desktop 1280x800 + phone 390x844 (touch): every card renders with its art, every card link is
 // followed by a real click/tap and must land on a 200 page with the game's own <title>, the played
 // badge survives a reload, and there are no console errors, external requests or horizontal overflow.
-// Also: corrupt/throwing localStorage and JS disabled must still offer all six games.
+// Also: corrupt/throwing localStorage and JS disabled must still offer all seven games.
 import { chromium } from '/home/box/swarm/side-gig/games/triangulate/node_modules/playwright/index.mjs';
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';

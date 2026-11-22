@@ -6,7 +6,7 @@ const docs = new URL('../docs/', import.meta.url).pathname;
 const html = fs.readFileSync(docs + 'index.html', 'utf8');
 
 test('registry entries are complete and unique', () => {
-  assert.equal(GAMES.length, 6);
+  assert.equal(GAMES.length, 7);
   const slugs = new Set();
   for (const g of GAMES) {
     assert.match(g.slug, /^[a-z0-9-]+$/, g.slug);

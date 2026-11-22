@@ -16,5 +16,5 @@ test('privacy and terms pages: static, linked from the hub, no external runtime 
   }
   const priv = fs.readFileSync(docs + 'privacy/index.html', 'utf8');
   assert.match(priv, /localStorage/);
-  assert.match(priv, /PLANNED, NOT YET ACTIVE[\s\S]{0,200}GoatCounter/, 'analytics must be marked planned until it is live');
+  assert.match(priv, /GoatCounter[\s\S]{0,300}cookieless/, 'privacy must describe cookieless GoatCounter');
 });

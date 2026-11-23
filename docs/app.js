@@ -18,7 +18,7 @@ const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls)
 
 for (const g of GAMES) {
   const li = el('li', 'card'); li.style.setProperty('--c', g.color);
-  const a = el('a'); a.href = `../${g.slug}/`;
+  const a = el('a'); a.href = `../${g.slug}/?ref=arcade`;
   a.setAttribute('aria-label', `Play ${g.name}: ${g.genre}. ${g.tags.join(', ').replace(/🤖\s*/g, '')}`);
 
   const art = el('div', 'art');

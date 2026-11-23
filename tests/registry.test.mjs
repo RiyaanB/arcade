@@ -48,7 +48,7 @@ test('noscript fallback lists exactly the registry, in order', () => {
 });
 
 test('no external runtime requests in the page source', () => {
-  const src = html.replace(/<meta[^>]*>/g, '').replace(/<script data-goatcounter[^>]*><\/script>/g, '').replace(/<a [^>]*href="https:\/\/github\.com[^"]*"/g, '');
+  const src = html.replace(/<meta[^>]*>/g, '').replace(/<link rel="canonical"[^>]*>/g, '').replace(/<script data-goatcounter[^>]*><\/script>/g, '').replace(/<a [^>]*href="https:\/\/github\.com[^"]*"/g, '');
   assert.doesNotMatch(src, /(src|href)="(https?:)?\/\//);
   for (const f of ['app.js', 'style.css', 'games.js']) assert.doesNotMatch(fs.readFileSync(docs + f, 'utf8'), /https?:\/\/(?!riyaanb\.github\.io)/, f);
 });
